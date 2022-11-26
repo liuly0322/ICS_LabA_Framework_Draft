@@ -1,7 +1,7 @@
 CC=g++
-CFLAGS=-I. -g
-DEPS = assembler.h
-OBJ = assembler.o main.o 
+CFLAGS=-I. -g -std=c++17
+DEPS=assembler.h
+OBJ=assembler.o main.o
 
 %.o: %.cpp $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
