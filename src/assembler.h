@@ -159,7 +159,6 @@ static inline std::string &Trim(std::string &s) {
 // Note: please implement function Trim first
 static std::string FormatLine(const std::string &line) {
     // TO BE DONE
-    return "";
 }
 
 static int RecognizeNumberValue(const std::string &str) {

@@ -8,7 +8,7 @@ If you choose to use the framework we provide:
 
 - Your task is to replace all `TO BE DONE` with the correct code.
 - You'll need to learn how to use `Makefile`.
-- We recommend you to finish this Lab in Linux.
+- We recommend you to finish this Lab in Linux ([vlab](https://vlab.ustc.edu.cn/) is a good option).
 
 Otherwise, you can also write the assembler from scratch by yourself.
 
@@ -29,8 +29,8 @@ You'll need to complete all `TO BE DONE` in `assembler.h` and `assembler.cpp`
 
 ## Assignment
 
-- The correct code will get 95% of the marks for this experiment.
-- Report accounts for 5% of the score.
+- The correct code will get you 95% of the marks for this experiment.
+- Report accounts for the rest 5%.
 
 You only need to hand in your report renamed `PB21xxxxxx_姓名_labA.pdf`.
 
@@ -63,15 +63,15 @@ will remove `assembler.o`, `main.o`, and `assembler`
 
 ## Part1: The first pass
 
-### step1: format every line
+### Step1: Format every line
 
 Before we process any line read from a `.asm` file, we need to do some pre-processing:
 
-- remove comments(comments start with `;`).
-- convert the line into uppercase
-- replace all commas with whitespace (for splitting)
-- replace all "\t\n\r\f\v" with whitespace (so `TAB` and other control chars become whitespace)
-- remove the leading and trailing whitespaces
+- remove comments (comments starting with `;`).
+- convert the line into uppercase.
+- replace all commas with whitespace (for splitting).
+- replace all "\t\n\r\f\v" with whitespace (so `TAB` and other control chars become whitespace).
+- remove the leading and trailing whitespaces.
   - implement `Trim` function first
 
 To simplify the problem, we assume the operand of `.STRINGZ` only consists of uppercase English letters or numbers.
@@ -80,16 +80,16 @@ To simplify the problem, we assume the operand of `.STRINGZ` only consists of up
 
 Complete `FormatLine` function in `assembler.h` in this step.
 
-### step2: store label
+### Step2: Store label
 
-In the first pass of assembly, you need to store symbols with their addresses in the Symbol Table.
+In the first pass of assembly, you need to store labels with their addresses in the Symbol Table.
 
 Complete `LineLabelSplit` function in `assembler.cpp` in this step.
 
 This function accepts a formatted line(in step1) and:
 
 - If the first word in the line is not an opcode, then treat it as a label. Store it with its corresponding address in the Symbol Table. Return the line with the label removed.
-- else, simply return the line.
+- Otherwise, simply return the line.
 
 `label_map` is a member of the `assembler` class, you can store the label with its address by:
 
@@ -97,11 +97,11 @@ This function accepts a formatted line(in step1) and:
 label_map.AddLabel(/* something here */)
 ```
 
-### step3: complete the first pass
+### Step3: Complete the first pass
 
 Complete `firstPass` function in `assembler.cpp` in this step.
 
-Modify the `current_address`
+You only need to modify `current_address`.
 
 ## Part2: The second pass
 
@@ -152,9 +152,9 @@ You may need to implement some helper functions in `assembler.h` first:
 
 ## Test
 
-Congratulations! now you should have finished the tiny LC3 assembler!
+Congratulations! Now you should have finished the tiny LC3 assembler!
 
-you can see the helper information of the assembler by typing command:
+Make sure you are in the root directory (which contains Makefile), then you can see the helper information of the assembler by typing command:
 
 ```shell
 make  # generate executable file
@@ -177,8 +177,20 @@ Options
 -s : hex mode
 ```
 
-To assemble an `input.asm` file into `output.bin`, type command:
+To assemble an `input.asm` file into `output.bin`, type command (still in root directory):
 
-```
+```bash
 ./assembler -f input.asm -o output.bin
 ```
+
+We have provide you with the testcases in the `test` subdirectory. Your `assembler` must be able to take in `asm` file in `testcases` folder, and output corresponding bin file in `expected` folder.
+
+For example, you can do:
+
+```bash
+mkdir /test/actual
+./assembler -f ./test/testcases/lab1.asm -o ./test/actual/lab1.bin
+diff ./test/actual/lab1.bin ./test/expected/lab1.bin
+```
+
+If the two files are identical, then diff will output nothing, which means your assembler works.
