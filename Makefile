@@ -1,13 +1,13 @@
 CC=g++
 CFLAGS=-I. -g -std=c++17
-DEPS=assembler.h
+VPATH=src
 OBJ=assembler.o main.o
-
-%.o: %.cpp $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
 
 assembler: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
+
+%.o: %.cpp $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
 
 all: assembler
 
