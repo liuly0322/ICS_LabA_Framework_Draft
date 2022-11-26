@@ -22,7 +22,7 @@ unsigned LabelMapType::GetAddress(const std::string &str) const {
     return labels_.at(str);
 }
 
-std::string assembler::TranslateOprand(int current_address, std::string str,
+std::string assembler::TranslateOprand(unsigned int current_address, std::string str,
                                        int opcode_length) {
     // Translate the oprand
     str = Trim(str);
@@ -172,7 +172,7 @@ std::string assembler::TranslatePseudo(std::stringstream &command_stream) {
 }
 
 std::string assembler::TranslateCommand(std::stringstream &command_stream,
-                                        int current_address) {
+                                        unsigned int current_address) {
     std::string opcode;
     command_stream >> opcode;
     auto command_tag = IsLC3Command(opcode);
@@ -337,8 +337,7 @@ int assembler::secondPass(std::string &output_filename) {
             output_file << TranslatePseudo(command_stream) << std::endl;
         } else {
             // LC3 command
-            output_file << TranslateCommand(command_stream, address)
-                        << std::endl;
+            output_file << TranslateCommand(command_stream, address) << std::endl;
         }
     }
 
@@ -349,8 +348,7 @@ int assembler::secondPass(std::string &output_filename) {
 }
 
 // assemble main function
-int assembler::assemble(std::string &input_filename,
-                        std::string &output_filename) {
+int assembler::assemble(std::string &input_filename, std::string &output_filename) {
     auto first_scan_status = firstPass(input_filename);
     if (first_scan_status != 0) {
         return first_scan_status;
