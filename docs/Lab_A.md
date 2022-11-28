@@ -189,8 +189,8 @@ For example, you can do:
 
 ```bash
 mkdir /test/actual
-./assembler -f ./test/testcases/lab1.asm -o ./test/actual/lab1.bin
-diff ./test/actual/lab1.bin ./test/expected/lab1.bin
+./assembler -f ./test/testcases/test1.asm -o ./test/actual/test1.bin
+diff ./test/actual/test1.bin ./test/expected/test1.bin
 ```
 
 If the two files are identical, then diff will output nothing, which means your assembler works.
